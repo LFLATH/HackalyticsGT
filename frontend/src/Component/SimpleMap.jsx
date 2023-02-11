@@ -15,9 +15,9 @@ export default function SimpleMap(){
   return (
     <div style={{ height: '100vh', width: '100%' }}>
       <GoogleMapReact
-        bootstrapURLKeys={{ key: "" }}
+        bootstrapURLKeys={{ key: "INSERTKEY" }}
         defaultCenter={defaultProps.center}
-        defaultZoom={defaultProps.zoom}
+        defaultZoom={defaultProps.zoom}        
       >
         <AnyReactComponent
           lat={59.955413}
