@@ -48,7 +48,6 @@ def get_historical_weather(lat, long, days=1):
     res.raise_for_status()
     res_json = res.json()
     df = pd.DataFrame(res_json["hourly"])
-    print(df.columns)
     df.rename(columns=conversion_dict, inplace=True)
     df['timestamp'] = pd.to_datetime(df['timestamp'], unit="s")
     df['cloud_coverage'] = df['cloud_coverage'] / 100 * 8  # percentage to oktal (?)
