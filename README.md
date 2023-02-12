@@ -1,23 +1,5 @@
-# WIP
+# Power Map
+ 
+Ludwig Lechtreck & Michael Tang
 
-https://www.kaggle.com/c/ashrae-energy-prediction
-1. predict energy usage of buildings by using this dataset
-2. web UI where the user can input some building data and get the energy prediction
-3. user can also click on their house on e.g. google maps so some data can be automatically filled in
-
-
-
-UI Design Specs:
-
-Color Pallette:
-#464D77 Blue
-#36827F Teal
-#F9DB6D Yellow
-#F4EDED White
-#877666 Brown
-
-Text: #877666
-
-Backdrop: #F4EDED 
-
-Accents/Graphics: #F9DB6D, #36827F, #464D77
+The increasing demand for sustainable and energy-efficient buildings has created a need to predict energy consumption. Often it is difficult to predict the precise impact of various energy efficiency improvements.  Ever-changing weather conditions make it even more difficult to assess such impacts. In our Hacklytics submission, we present a solution for predicting the energy consumption of a building over a month-scale. Our approach uses machine learning algorithms and building performance data to estimate the energy consumption of a building with high accuracy.
