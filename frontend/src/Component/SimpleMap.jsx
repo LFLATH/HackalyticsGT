@@ -1,30 +1,27 @@
-import React from "react";
 import GoogleMapReact from 'google-map-react';
+import React, { useEffect } from 'react';
+import MarkerIcon from './MarkerIcon';
+const AnyReactComponent = ({ text }) => <div><MarkerIcon/></div>;
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
-
-export default function SimpleMap(){
-  const defaultProps = {
-    center: {
-      lat: 10.99835602,
-      lng: 77.01502627
-    },
-    zoom: 11
+export default function SimpleMap(props){
+    const defaultProps = {
+    zoom: 17
   };
-
+  useEffect(()=>{
+},[props.location]);
   return (
-    <div style={{ height: '100vh', width: '100%' }}>
+    <div style={{ height: '50vh', width: '100%' }}>
       <GoogleMapReact
-        bootstrapURLKeys={{ key: "INSERTKEY" }}
-        defaultCenter={defaultProps.center}
-        defaultZoom={defaultProps.zoom}        
+        bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API }}
+        defaultZoom={defaultProps.zoom}
+        center={(props.location ? props.location:[33.7775, -84.3961])}
       >
-        <AnyReactComponent
-          lat={59.955413}
-          lng={30.337844}
-          text="My Marker"
+    <AnyReactComponent
+          lat={props.location[0]}
+          lng={props.location[1]}
         />
       </GoogleMapReact>
     </div>
   );
 }
+

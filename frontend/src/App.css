@@ -1,3 +1,10 @@
+
 .input {
     width:400px;
+}
+
+.charts{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
 }

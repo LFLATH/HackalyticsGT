@@ -1,30 +1,42 @@
 import './App.css';
+import axios from 'axios';
 import SearchBox from './Component/SearchBox';
 import SimpleMap from './Component/SimpleMap';
+import React, { useState } from 'react';
+import Charts from "./Component/Charts"
+import Title from './Component/Title';
+
 function App() {
-    let curr_location;
+ 
+
+    const [center, setCenter] = useState([33.7775, -84.3961]);
+    const [data, setData] = useState({});
     function changeLocation(local) {
-        curr_location = [local[0].formatted_address, local[0].geometry.viewport.Ma.hi, local[0].geometry.viewport.Ya.hi];
-        console.log(local);
-        console.log(local[0].formatted_address);
-        console.log(local[0].geometry.viewport.Ma.hi);
-        console.log(local[0].geometry.viewport.Ya.hi);
-        sendLocal(curr_location);
+        let curr_location = {
+          long: local[0].geometry.viewport.Ya.hi,
+          lat: local[0].geometry.viewport.Ma.hi,
+          address: local[0].formatted_address,  
+        };
+        console.log(process.env.REACT_APP_API_URL);
+        axios.post(process.env.REACT_APP_API_URL, curr_location)
+        .then(function (response) {
+            setData(response.data);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+        setCenter([local[0].geometry.viewport.Ya.hi, local[0].geometry.viewport.Ma.hi]);
     }
-
-    function sendLocal(data) {
-        fetch('IP_GOES_HERE', {
-            method: 'POST', 
-            mode: 'cors', 
-            body: JSON.stringify(data) 
-
-        })
-    }
+  
 
   return (
     <div>
+        <Title/>
         <SearchBox changeLoc={changeLocation} className="input" />
-        <SimpleMap location={curr_location} />      
+        <SimpleMap location={center} />  
+        <div className="charts">
+            <Charts data={data} />
+        </div> 
     </div>
   );
 }

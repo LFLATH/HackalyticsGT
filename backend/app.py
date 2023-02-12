@@ -6,10 +6,12 @@ import datetime
 import utils
 from flask import Flask, request
 from flask_caching import Cache
+from flask_cors import CORS
 from sklearn.preprocessing import OrdinalEncoder
 from sklearn.ensemble import HistGradientBoostingRegressor
 
 app = Flask(__name__)
+CORS(app)
 cache = Cache(app)
 
 with open('../prediction/models.pickle', 'rb') as f:
