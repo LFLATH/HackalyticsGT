@@ -23,7 +23,7 @@ AUTH_URL = "https://api.precisely.com/oauth/token"
 ADDRESS_URL = "https://api.precisely.com/property/v2/attributes/byaddress"
 BASE64_KEY = "Basic NTJjdEtaczdudFJZQ1o1b2JPbWpuZ2dHdjNSMFB5T1Y6Szh3U0gzcHhBeXhzdDZxMw=="
 
-def get_historical_weather(lat, long, days=1):
+def get_historical_weather(lat, long, days=200):
     end_date = datetime.datetime.now()
     start_date = end_date - datetime.timedelta(days=days)
     params = dict(
