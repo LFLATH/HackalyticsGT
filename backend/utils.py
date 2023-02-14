@@ -63,7 +63,16 @@ def precisely_get_address_details(address, auth):
         "attributes": "all",
     }, headers={"Authorization": auth_str}
     )
-    r.raise_for_status()
+    try:
+        r.raise_for_status()
+    except Exception as e:
+        print(str(e))
+        return {
+        "square_feet": 5000,
+        "year_built": 2000,
+        "primary_use": "Lodging/residential",
+        "floor_count": 4
+    }, False
     res_json = r.json()
     if "propertyAttributes" not in res_json:
         print("no geo data found")
@@ -72,7 +81,7 @@ def precisely_get_address_details(address, auth):
         "year_built": 2000,
         "primary_use": "Lodging/residential",
         "floor_count": 4
-    }
+    }, False
     
     attrs = res_json["propertyAttributes"]
     sqft = int(attrs.get("buildgSqFt"))
@@ -87,8 +96,9 @@ def precisely_get_address_details(address, auth):
         except:
             floor_count = 4
     d = {
-        "R": "Lodging/residential",
+        "RESIDENTIAL": "Lodging/residential",
         "C": "Office",
+        "COMMERCIAL": "Office",
         "V": "Other",
         "X": "Other",
         None: "Lodging/residential"
@@ -99,4 +109,4 @@ def precisely_get_address_details(address, auth):
         "year_built": year,
         "primary_use": primary_usage,
         "floor_count": floor_count
-    }
+    }, True

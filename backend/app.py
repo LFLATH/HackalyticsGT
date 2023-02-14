@@ -12,6 +12,7 @@ from sklearn.ensemble import HistGradientBoostingRegressor
 
 app = Flask(__name__)
 CORS(app)
+app.config["CACHE_TYPE"] = "SimpleCache"
 cache = Cache(app)
 
 with open('../prediction/models.pickle', 'rb') as f:
@@ -71,11 +72,16 @@ def query():
     long = req_json.get("long")
     lat = req_json.get("lat")
     address = req_json.get("address")
-    details = address_details(address)
-    res = get_historical_predictions(
+    details, is_fetched_successfully = address_details(address)
+    predictions = get_historical_predictions(
         lat=lat,
         long=long,
         **details,
+    )
+    res = dict(
+        predictions=predictions,
+        buildingData=details,
+        foundBuildingData=is_fetched_successfully,
     )
     return res
 
